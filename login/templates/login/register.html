@@ -1,0 +1,93 @@
+{% load static %}
+<html>
+<head>
+    <title>注册</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+    <meta name="keywords"
+          content="Credit Login / Register Form Responsive Widget,Login form widgets, Sign up Web forms , Login signup Responsive web form,Flat Pricing table,Flat Drop downs,Registration Forms,News letter Forms,Elements"/>
+
+    <!-- Custom Theme files -->
+    <link href="{% static 'login/css/font-awesome.min.css' %}" rel="stylesheet" type="text/css" media="all"/>
+    <link href="{% static 'login/css/style.css' %}" rel="stylesheet" type="text/css" media="all"/>
+        <link href="{% static 'login/css/pops.css' %}" rel="stylesheet" type="text/css" media="all"/>
+    <!-- //Custom Theme files -->
+
+</head>
+<body>
+    <h1>世界无奇不有</h1>
+    <div class="main-agileits">
+        <!--form-stars-here-->
+        <div class="form-w3-agile">
+            <h2>欢迎注册</h2>
+            <form action="/register/" method="post">
+                {% csrf_token %}
+                {% if register_form.captcha.errors %}
+                    <div class="alert alert-warning"><font color="#FF0000">{{ register_form.captcha.errors }}</font></div>
+                {% elif message %}
+                    <div class="alert alert-warning"><font color="#FF0000">{{ message }}</font></div>
+                {% endif %}
+                <div class="form-sub-w3">
+                    {{ register_form.username }}
+                    <div class="icon-w3">
+                        <i class="fa fa-user" aria-hidden="true"></i>
+                    </div>
+                </div>
+                <div class="form-sub-w3">
+                    {{ register_form.password1 }}
+                    <div class="icon-w3">
+                        <i class="fa fa-unlock-alt" aria-hidden="true"></i>
+                    </div>
+                </div>
+                <div class="form-sub-w3">
+                    {{ register_form.password2 }}
+                    <div class="icon-w3">
+                        <i class="fa fa-unlock-alt" aria-hidden="true"></i>
+                    </div>
+                </div>
+                <div class="form-sub-w3">
+                    {{ register_form.email }}
+                    <div class="icon-agile">
+                        <i class="fa fa-envelope-o" aria-hidden="true"></i>
+                    </div>
+                </div>
+                <div class="form-sub-w3">
+                    {{ register_form.sex }}
+                    <div class="icon-agile">
+                        <i class="fa fa-user" aria-hidden="true"></i>
+                    </div>
+                </div>
+                <div class="form-sub-w3">
+                    {{ register_form.captcha }}
+                    <div class="icon-w3">
+                        <i class="fa fa-unlock-alt" aria-hidden="true"></i>
+                    </div>
+                </div>
+                <p class="p-bottom-w3ls">已有账号?    <a class="w3_play_icon1" href="/login/">   点击登录</a></p>
+
+                <div class="submit-w3l">
+                    <input type="submit" value="注册">
+                </div>
+            </form>
+        </div>
+        <!--//form-ends-here-->
+    </div>
+    <!-- copyright -->
+    <div class="copyright w3-agile">
+        <p> © 2019 Credit Login / Register Form . All rights reserved | Design by <a href="http://www.bootstrapmb.com/">bootstrapmb</a></p>
+    </div>
+    <!-- //copyright -->
+    <script type="text/javascript" src="{% static 'login/js/jquery-2.1.4.min.js' %}"></script>
+    <!-- pop-up-box -->
+    <script src="{% static 'login/js/jquery.magnific-popup.js' %}" type="text/javascript"></script>
+    <!--//pop-up-box -->
+    <script>
+        $('img.captcha').click(function() {
+             $.getJSON('/captcha/refresh/',function(json) {
+                 console.log(json);
+                 $("img.captcha").attr("src",json.image_url);
+                 $("#id_captcha_0").val(json.key); }); return false;
+         });
+    </script>
+</body>
+</html>

@@ -1,0 +1,16 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>注册确认</title>
+</head>
+<body>
+
+
+    <h1 style="margin-left: 100px;">{{ message }} 2s后将会自动跳转登录界面！没有自动跳转请<a href="/login/">点击这里</a> </h1>
+    <script>
+        window.setTimeout("window.location='/login/'",2000);
+    </script>
+
+</body>
+</html>
